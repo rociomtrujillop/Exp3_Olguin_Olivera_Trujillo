@@ -1,55 +1,78 @@
-## Servicios REST y Endpoints
+API REST - Productos | Proyecto Perfulandia
 
-### Usuario Service
+Este documento describe los endpoints REST disponibles en el servicio ProductosRestController, indicando el método HTTP, la ruta, el propósito y los datos esperados para su ejecución o prueba.
 
-GET     /usuarios
-Obtiene el listado completo de usuarios.
+URL Base:
+http://localhost:8080/api/productos
 
-GET     /usuarios/{id}
-Obtiene un usuario específico por su ID.
+1. Crear un producto
+Método: POST
+Ruta: /api/productos
+Descripción: Crea un nuevo producto en el sistema.
+Cuerpo esperado (formato JSON):
 
-POST    /usuarios
-Crea un nuevo usuario.
+{
+"nombre_Producto": "Invictus Victory Elixir",
+"descripcion_Producto": "Perfume para hombre",
+"precio": 60000,
+"cantidad": 10
+}
 
-PUT     /usuarios/{id}
-Actualiza los datos de un usuario existente.
+Respuesta esperada: 201 Created
 
-DELETE  /usuarios/{id}
-Elimina un usuario del sistema.
+2. Listar todos los productos
+Método: GET
+Ruta: /api/productos
+Descripción: Devuelve una lista con todos los productos registrados.
+Respuesta esperada: 200 OK con un arreglo de productos.
 
-------------------------------------------------------
+3. Ver detalle de un producto por ID
+Método: GET
+Ruta: /api/productos/{id}
+Descripción: Devuelve los datos de un producto específico si existe.
+Ejemplo de ruta: /api/productos/1
+Respuesta esperada:
 
-### Producto Service
+200 OK si el producto existe.
 
-GET     /productos
-Lista todos los productos disponibles.
+404 Not Found si no existe.
 
-GET     /productos/{id}
-Devuelve un producto específico.
+Además, esta respuesta incluye enlaces HATEOAS para navegar la API.
 
-POST    /productos
-Agrega un nuevo producto.
+4. Modificar un producto existente
+Método: PUT
+Ruta: /api/productos/{id}
+Descripción: Actualiza la información de un producto existente.
+Ejemplo de ruta: /api/productos/1
+Cuerpo esperado (formato JSON):
 
-PUT     /productos/{id}
-Edita los datos de un producto.
+{
+"nombre_Producto": "Perfume Actualizado",
+"descripcion_Producto": "Nuevo aroma",
+"precio": 65000,
+"cantidad": 7
+}
 
-DELETE  /productos/{id}
-Elimina un producto por su ID.
+Respuesta esperada:
 
-------------------------------------------------------
+200 OK si fue actualizado correctamente.
 
-### Proveedor Service
-GET     /proveedores  
-Lista todos los proveedores registrados.
+404 Not Found si el producto no existe.
 
-GET     /proveedores/{id}  
-Consulta un proveedor específico.
+5. Eliminar un producto
+Método: DELETE
+Ruta: /api/productos/{id}
+Descripción: Elimina un producto registrado.
+Ejemplo de ruta: /api/productos/1
+Respuesta esperada:
 
-POST    /proveedores  
-Registra un nuevo proveedor.
+200 OK si fue eliminado exitosamente.
 
-PUT     /proveedores/{id}  
-Actualiza la información de un proveedor.
+404 Not Found si el producto no existe.
 
-DELETE  /proveedores/{id}  
-Elimina un proveedor por su ID.
+Documentación de la API (Swagger UI)
+La documentación completa e interactiva de los endpoints está disponible en la siguiente ruta:
+
+http://localhost:8080/swagger-ui.html
+
+Desde esta interfaz se pueden probar los métodos, visualizar las estructuras de entrada/salida y los posibles códigos de respuesta.
